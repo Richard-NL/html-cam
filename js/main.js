@@ -1,54 +1,28 @@
-var ScreenShotApplication = new Class({
-	localMediaStream: null,
+var app = angular.module('Snapstar', []);
 
-	initialize: function () {
-		this.getUserMedia({ video: true },
-			this.streamToVideoElement.bind(this),
-			this.errorCallback
-		);
+app.run(function($rootScope) {
 
-		this.setElementListeners();
-	},
+});
 
-	getUserMedia: function () {
-		if ( typeof arguments !== 'object' && arguments.length !== 3) {
-			throw 'Tree params required for this method';
-		}
-		
-		var getUserMediaFunction = Modernizr.prefixed( 'getUserMedia', navigator);
+app.controller('PictureController', ['$scope', function( $scope ) {
+	$scope.video = document.querySelector('video');
+	$scope.canvas = document.querySelector('canvas');
+	$scope.ctx =  $scope.canvas.getContext('2d')
+	$scope.userMediaService = new UserMediaService();
 
-		getUserMediaFunction.bind(this);
 
-		getUserMediaFunction(arguments[0], arguments[1], arguments[2]);
-	},
+	$scope.startCamera = function () {
+		$scope.userMediaService.startVideoStream( $scope.video );
+	};
 
-	streamToVideoElement: function ( localMediaStream ) {
-		var video = document.querySelector('video');
-		video.src = window.URL.createObjectURL( localMediaStream );
-		this.localMediaStream = localMediaStream;
-	},
-
-	errorCallback: function ( event ) {
-		alert( 'Error access to cam denied' );
-
-	},
-	setElementListeners: function () {
-		$('capture').addEvent( 'click', this.makePicture.bind( this ) );
-	},
-	makePicture: function () {
-		var canvas = document.querySelector('canvas'),
-			ctx = canvas.getContext('2d'),
-			video = document.querySelector('video');
-		$$('canvas').setProperty('height', 600);
-		$$('canvas').setProperty('width', 600);
-
-		if ( this.localMediaStream ) {
-			ctx.drawImage(video, 0, 0);
+	
+	$scope.createPicture = function () {
+		if ( $scope.userMediaService.getLocalMediaStream ) {
+			$scope.ctx.drawImage($scope.video, 0, 0);
 			var image = new Image();
-			image.src = canvas.toDataURL('image/webp');
+			image.src = $scope.canvas.toDataURL('image/webp');
+			return;
 		}
-	} 
-});
-window.addEvent('domready', function() {
-	new ScreenShotApplication();
-});
+	};
+}]);
+

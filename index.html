@@ -1,26 +1,33 @@
 <!doctype html>
 
-<html lang="en">
+<html lang="en" ng-app="Snapstar">
 <head>
 	<meta charset="utf-8">
 
-	<title>The HTML5 Cam</title>
-	<meta name="description" content="The HTML5 Herald">
-	<meta name="author" content="SitePoint">
+	<title>Snapstar</title>
+	<meta name="description" content="Begin foto te maken dan">
+	<meta name="author" content="Richard Hoogstad">
 
-	<!--<link rel="stylesheet" href="css/styles.css?v=1.0">-->
 
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 	<script src="js/modernizr.custom.97966.js"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/mootools/1.5.1/mootools-yui-compressed.js"></script>
+	<script src="js/service/UserMediaService.js"></script>
 	<script src="js/main.js"></script>
 
 </head>
 
 <body>
-<div id="status"></div>
-<video autoplay="autoplay" width="600" height="600"></video>
-<canvas></canvas>
-<button id="capture">Take Shot</button>
+<!--<div id="status"></div>-->
+<!--<video autoplay="autoplay" width="600" height="600"></video>-->
+<!--<canvas></canvas>-->
+<!--<button id="capture">Take Shot</button>-->
 
+<div ng-controller="PictureController">
+	<a ng-click="startCamera()" href="#">Start camera</a>
+	<a ng-click="createPicture()" href="#">Create Picture</a>
+	<video height="600" width="600" autoplay="autoplay"></video>
+	<canvas height="600" width="600"></canvas>
+</div>
 </body>
 </html>
