@@ -8,7 +8,7 @@ var UserMediaService = new Class({
 	startVideoStream: function( videoElement ) {
 		this.videoElement = videoElement;
 		this.getUserMedia({ video: true },
-			this.streamToVideoElement.bind(this),
+			this.streamToVideoElementAndCreateLocalMediaStream.bind( this ),
 			this.errorCallback
 		);
 
@@ -22,9 +22,9 @@ var UserMediaService = new Class({
 		getUserMediaFunction(arguments[0], arguments[1], arguments[2]);
 	},
 
-	streamToVideoElement: function ( localMediaStream ) {
+	streamToVideoElementAndCreateLocalMediaStream: function ( localMediaStream ) {
 		try {
-			this.videoElement.src = window.URL.createObjectURL(localMediaStream);
+			this.videoElement.src = window.URL.createObjectURL( localMediaStream );
 		} catch( exception ) {
 			throw exception;
 		}

@@ -1,0 +1,87 @@
+<!doctype html>
+
+<html lang="en" ng-app="Snapstar">
+<head>
+	<meta charset="utf-8">
+
+	<title>Snapstar</title>
+	<meta name="description" content="Begin foto te maken dan">
+	<meta name="author" content="Richard Hoogstad">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+	<script src="js/modernizr.custom.97966.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/mootools/1.5.1/mootools-yui-compressed.js"></script>
+
+	<script src="js/service/UserMediaService.js"></script>
+	<script src="js/main.js"></script>
+	<style>
+		body {
+			padding-top: 50px;
+		}
+		video, canvas {
+			padding: 0;
+			margin: 0;
+			clear: both;
+		}
+		.pt-small {
+			padding-top: 10px;
+		}
+	</style>
+</head>
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Snapstar</a>
+		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Foo</a></li>
+				<li><a href="#about">Bar</a></li>
+				<li><a href="#contact">Baz</a></li>
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div>
+</nav>
+
+<div class="container" ng-controller="PictureController">
+	
+	<div ng-controller="PictureController">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>Maak een foto!</h1>
+				<a class="btn btn-lg btn-primary" ng-click="startCamera()" href="#">Start camera</a>
+				<a class="btn btn-lg btn-success" ng-click="createPicture()" href="#" ng-show="showVideo" class="ng-hide">Create Picture</a>
+				<a class="btn btn-lg btn-success" ng-click="postPicture()" href="#" ng-show="showPicture" class="ng-hide">Post it</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 pt-small" ng-show="showVideo" class="ng-hide">
+				<video height="550" width="700" autoplay="autoplay"></video>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 pt-small" ng-show="showPicture" class="ng-hide">
+				<canvas height="550" width="700"></canvas>
+			</div>
+		</div>
+	</div>
+
+</div><!-- /.container -->
+
+
+
+<script src="js/bootstrap-without-jquery.min.js"></script>
+</body>
+</html>
